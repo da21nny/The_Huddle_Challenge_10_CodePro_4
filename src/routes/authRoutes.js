@@ -1,7 +1,7 @@
-const express = require('express');
-const { register, login, logout } = require('../controllers/authController');
-const { csrfValidator } = require('../middlewares/csrfMiddleware');
-const { loginRateLimiter } = require('../middlewares/rateLimiter');
+import express from 'express';
+import { register, login, logout } from '../controllers/authController.js';
+import { csrfValidator } from '../middlewares/csrfMiddleware.js';
+import { loginRateLimiter } from '../middlewares/rateLimiter.js';
 
 const router = express.Router();
 
@@ -9,4 +9,4 @@ router.post('/register', csrfValidator, register);
 router.post('/login', loginRateLimiter, csrfValidator, login);
 router.post('/logout', csrfValidator, logout);
 
-module.exports = router;
+export default router;
