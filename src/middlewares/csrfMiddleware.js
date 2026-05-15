@@ -19,10 +19,10 @@ const csrfValidator = (req, res, next) => {
         return next();
     }
 
-    const tokenFromReq = req.body._csrf || req.headers['x-csrf-token'];
+    const tokenFromReq = req.body?._csrf || req.headers['x-csrf-token'];
     
-    if (!tokenFromReq || tokenFromReq !== req.session.csrfToken) {
-        return res.status(403).send('Error CSRF: Token inválido o ausente.');
+    if (!req.session || !tokenFromReq || tokenFromReq !== req.session.csrfToken) {
+        return res.status(403).send('Error CSRF: Token inválido o ausente. (Intenta recargar la página de Login)');
     }
 
     next();

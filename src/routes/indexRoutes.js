@@ -1,7 +1,6 @@
 import express from 'express';
 import { requireAuth } from '../middlewares/authMiddleware.js';
 import { requireRole } from '../middlewares/roleMiddleware.js';
-import { csrfGenerator } from '../middlewares/csrfMiddleware.js';
 import User from '../models/User.js';
 
 const router = express.Router();
@@ -11,11 +10,11 @@ router.get('/', (req, res) => {
     res.redirect('/login');
 });
 
-router.get('/login', csrfGenerator, (req, res) => {
+router.get('/login', (req, res) => {
     res.render('login', { layout: 'main' });
 });
 
-router.get('/register', csrfGenerator, (req, res) => {
+router.get('/register', (req, res) => {
     res.render('register', { layout: 'main' });
 });
 
