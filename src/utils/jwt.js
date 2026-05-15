@@ -1,4 +1,4 @@
-const jwt = require('jsonwebtoken');
+import jwt from 'jsonwebtoken';
 
 const JWT_SECRET = process.env.JWT_SECRET || 'super_secret_jwt_key_passport_inc';
 const JWT_EXPIRES_IN = '1h';
@@ -19,7 +19,7 @@ const verifyToken = (token) => {
     }
 };
 
-module.exports = {
+export {
     generateToken,
     verifyToken,
     JWT_SECRET
