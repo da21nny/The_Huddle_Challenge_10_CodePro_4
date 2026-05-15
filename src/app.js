@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import express from 'express';
 import { engine } from 'express-handlebars';
 import path from 'path';
@@ -5,6 +6,7 @@ import session from 'express-session';
 import cookieParser from 'cookie-parser';
 import { xssSanitizer } from './middlewares/xssMiddleware.js';
 import { generalLimiter } from './middlewares/rateLimiter.js';
+import { csrfGenerator } from './middlewares/csrfMiddleware.js';
 import { fileURLToPath } from 'url';
 
 // Rutas
@@ -32,7 +34,7 @@ app.use(cookieParser());
 
 // Sesiones Persistentes (Cookies)
 app.use(session({
-    secret: process.env.SESSION_SECRET || 'passport_session_super_secret',
+    secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
     cookie: {
@@ -46,6 +48,7 @@ app.use(session({
 // Protección global
 app.use(generalLimiter); // Evitar DoS general
 app.use(xssSanitizer);   // Escapar tags HTML del req.body
+app.use(csrfGenerator);  // Generar y exponer token CSRF globalmente
 
 // Rutas
 app.use('/', indexRoutes);
@@ -55,5 +58,4 @@ app.use('/auth', authRoutes);
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Servidor de PassPort Inc. corriendo en http://localhost:${PORT}`);
-    console.log(`Usuario Admin por defecto: admin@passport.inc / adminpassword`);
 });
