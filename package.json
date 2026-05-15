@@ -2,7 +2,8 @@
   "name": "the_huddle_challenge_10_codepro_4",
   "version": "1.0.0",
   "description": "Maestro de la Autenticación Segura: El Retorno del Token",
-  "main": "index.js",
+  "main": "src/app.js",
+  "type": "module",
   "directories": {
     "doc": "docs"
   },
@@ -16,7 +17,6 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs",
   "bugs": {
     "url": "https://github.com/da21nny/The_Huddle_Challenge_10_CodePro_4/issues"
   },
