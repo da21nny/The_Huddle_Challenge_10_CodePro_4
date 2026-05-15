@@ -1,6 +1,6 @@
-const User = require('../models/User');
-const bcrypt = require('bcrypt');
-const { generateToken } = require('../utils/jwt');
+import User from '../models/User.js';
+import bcrypt from 'bcrypt';
+import { generateToken } from '../utils/jwt.js';
 
 const register = async (req, res) => {
     try {
@@ -77,4 +77,4 @@ const logout = (req, res) => {
     res.redirect('/login');
 };
 
-module.exports = { register, login, logout };
+export { register, login, logout };
