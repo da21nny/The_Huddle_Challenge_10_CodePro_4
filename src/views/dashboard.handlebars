@@ -1,0 +1,24 @@
+<div class="dashboard-container">
+    <div class="card">
+        <h1>Bienvenido a PassPort Inc.</h1>
+        <p>Has iniciado sesión exitosamente.</p>
+        <p><strong>Email:</strong> {{user.email}}</p>
+        <p><strong>Rol:</strong> 
+            <span class="badge {{#if (eq user.role 'Administrador')}}badge-admin{{else}}badge-user{{/if}}">
+                {{user.role}}
+            </span>
+        </p>
+
+        {{#if (eq user.role 'Administrador')}}
+            <div style="margin-top: 20px; padding: 15px; background: #ffebee; border-radius: 4px;">
+                <h3>Opciones de Administrador</h3>
+                <a href="/admin" style="color: #d32f2f; text-decoration: none; font-weight: bold;">➡️ Ir al Panel de Administración</a>
+            </div>
+        {{/if}}
+
+        <form action="/auth/logout" method="POST" style="margin-top: 30px;">
+            <input type="hidden" name="_csrf" value="{{csrfToken}}">
+            <button type="submit" style="background-color: #d32f2f; width: auto; padding: 10px 20px;">Cerrar Sesión</button>
+        </form>
+    </div>
+</div>
