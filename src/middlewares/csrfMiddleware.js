@@ -1,4 +1,4 @@
-const crypto = require('crypto');
+import crypto from 'crypto';
 
 // Middleware para generar y proveer el token CSRF a las vistas
 const csrfGenerator = (req, res, next) => {
@@ -28,4 +28,4 @@ const csrfValidator = (req, res, next) => {
     next();
 };
 
-module.exports = { csrfGenerator, csrfValidator };
+export { csrfGenerator, csrfValidator };
