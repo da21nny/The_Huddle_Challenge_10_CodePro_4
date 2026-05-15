@@ -1,5 +1,5 @@
-const { verifyToken } = require('../utils/jwt');
-const User = require('../models/User');
+import { verifyToken } from '../utils/jwt.js';
+import User from '../models/User.js';
 
 const requireAuth = async (req, res, next) => {
     // 1. Check if using JWT (Authorization header or Cookie)
@@ -40,4 +40,4 @@ const requireAuth = async (req, res, next) => {
     return res.status(401).json({ error: 'No autorizado. Inicia sesión.' });
 };
 
-module.exports = { requireAuth };
+export { requireAuth };
