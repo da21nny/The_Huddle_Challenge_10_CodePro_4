@@ -57,10 +57,15 @@ class User {
 // Crear un administrador por defecto si no existe
 (async () => {
     try {
-        const db = await getDb();
-        const admin = await db.get(`SELECT * FROM users WHERE email = ?`, ['admin@passport.inc']);
-        if (!admin) {
-            await User.create({ email: 'admin@passport.inc', password: 'adminpassword', role: 'Administrador' });
+        const adminEmail = process.env.DEFAULT_ADMIN_EMAIL;
+        const adminPassword = process.env.DEFAULT_ADMIN_PASSWORD;
+
+        if (adminEmail && adminPassword) {
+            const db = await getDb();
+            const admin = await db.get(`SELECT * FROM users WHERE email = ?`, [adminEmail]);
+            if (!admin) {
+                await User.create({ email: adminEmail, password: adminPassword, role: 'Administrador' });
+            }
         }
     } catch (error) {
         console.error("Error creating default admin:", error.message);
