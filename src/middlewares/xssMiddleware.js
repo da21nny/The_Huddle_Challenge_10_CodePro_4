@@ -21,4 +21,4 @@ const xssSanitizer = (req, res, next) => {
     next();
 };
 
-module.exports = { xssSanitizer };
+export { xssSanitizer };
