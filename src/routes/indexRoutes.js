@@ -1,8 +1,8 @@
-const express = require('express');
-const { requireAuth } = require('../middlewares/authMiddleware');
-const { requireRole } = require('../middlewares/roleMiddleware');
-const { csrfGenerator } = require('../middlewares/csrfMiddleware');
-const User = require('../models/User');
+import express from 'express';
+import { requireAuth } from '../middlewares/authMiddleware.js';
+import { requireRole } from '../middlewares/roleMiddleware.js';
+import { csrfGenerator } from '../middlewares/csrfMiddleware.js';
+import User from '../models/User.js';
 
 const router = express.Router();
 
@@ -30,4 +30,4 @@ router.get('/admin', requireAuth, requireRole('Administrador'), async (req, res)
     res.render('admin', { layout: 'main', users: allUsers });
 });
 
-module.exports = router;
+export default router;
