@@ -1,0 +1,57 @@
+<div class="card">
+  <h1>Admin Panel</h1>
+
+  <h2>Users</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Email</th>
+        <th>Role</th>
+        <th>Created</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each users}}
+      <tr>
+        <td>{{this.id}}</td>
+        <td>{{this.email}}</td>
+        <td>{{this.role}}</td>
+        <td>{{this.created_at}}</td>
+        <td>
+          <form action="/admin/delete" method="POST" style="display:inline">
+            <input type="hidden" name="_csrf" value="{{../csrfToken}}">
+            <input type="hidden" name="userId" value="{{this.id}}">
+            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+          </form>
+        </td>
+      </tr>
+      {{/each}}
+    </tbody>
+  </table>
+
+  <h2>Login Attempts</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Email</th>
+        <th>IP</th>
+        <th>Date</th>
+        <th>Success</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each loginAttempts}}
+      <tr>
+        <td>{{this.email}}</td>
+        <td>{{this.ip_address}}</td>
+        <td>{{this.attempted_at}}</td>
+        <td>{{#if this.success}}✅{{else}}❌{{/if}}</td>
+      </tr>
+      {{/each}}
+    </tbody>
+  </table>
+
+  <a href="/dashboard" class="btn">Back to Dashboard</a>
+</div>
