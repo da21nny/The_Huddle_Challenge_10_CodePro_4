@@ -1,0 +1,19 @@
+<div class="card">
+  <h1>Dashboard</h1>
+
+  {{#if error}}
+    <div class="alert alert-error">{{error}}</div>
+  {{/if}}
+
+  <p><strong>Email:</strong> {{user.email}}</p>
+  <p><strong>Role:</strong> {{user.role}}</p>
+
+  {{#if (eq user.role "admin")}}
+    <a href="/admin" class="btn">Admin Panel</a>
+  {{/if}}
+
+  <form action="/logout" method="POST">
+    <input type="hidden" name="_csrf" value="{{csrfToken}}">
+    <button type="submit" class="btn btn-danger">Logout</button>
+  </form>
+</div>
